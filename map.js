@@ -18,9 +18,7 @@ const assertArraysEqual = function(actual, expected) {
 const map = function (array, callback) {
   const results = [];
   for (let item of array) {
-    console.log("item BEFORE: ", item);
-    console.log("item AFTER: ", callback(item));
-    console.log("---");
+
     // add transformed item to results
     results.push(callback(item));
   }
@@ -29,3 +27,6 @@ const map = function (array, callback) {
 
 const words = ["Jennie", "Lisa", "Rose", "Jisoo"];
 const results1 = map(words, (word) => word[0]);
+
+const expectedResults = ['J', 'L', 'R', 'J'];
+assertArraysEqual(results1, expectedResults);
