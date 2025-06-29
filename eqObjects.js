@@ -16,25 +16,40 @@ const eqArrays = function(array1, array2) {
   return true;
 };
 
+const eqArrays = require('./eqArrays');
+
 const eqObjects = function(object1, object2) {
   const keys1 = Object.keys(object1);
   const keys2 = Object.keys(object2);
 
-  if (keys1.length !== keys2.length) return false;
+  // Different number of keys = not equal
+  if (keys1.length !== keys2.length) {
+    return false;
+  }
 
   for (let key of keys1) {
     const val1 = object1[key];
     const val2 = object2[key];
 
+    // If both values are arrays
     if (Array.isArray(val1) && Array.isArray(val2)) {
       if (!eqArrays(val1, val2)) return false;
-    } else if (val1 !== val2) {
-      return false;
+
+    // If both values are objects (but not arrays)
+    } else if (typeof val1 === 'object' && typeof val2 === 'object' &&
+               !Array.isArray(val1) && !Array.isArray(val2)) {
+      if (!eqObjects(val1, val2)) return false; // 🔁 recursion
+
+    // Primitive value comparison
+    } else {
+      if (val1 !== val2) return false;
     }
   }
 
   return true;
 };
+
+module.exports = eqObjects;
 
 
 const shirtObject = { color: "red", size: "medium" };
