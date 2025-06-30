@@ -1,21 +1,25 @@
-const assertEqual = require("../assertEqual");
-const tail = require("../tail");
+const assert = require('chai').assert;
+const tail = require('../tail');
 
-// Original array
-const result = tail(["Hello", "Lighthouse", "Labs"]);
-assertEqual(result.length, 2);
-assertEqual(result[0], "Lighthouse");
-assertEqual(result[1], "Labs");
+describe("#tail", () => {
+  it("returns ['Lighthouse', 'Labs'] for ['Hello', 'Lighthouse', 'Labs']", () => {
+    const result = tail(["Hello", "Lighthouse", "Labs"]);
+    assert.deepEqual(result, ["Lighthouse", "Labs"]);
+  });
 
-// Test: 1-element array
-const single = tail(["OnlyOne"]);
-assertEqual(single.length, 0);
+  it("returns length 0 for single-element array", () => {
+    const result = tail(["OnlyOne"]);
+    assert.strictEqual(result.length, 0);
+  });
 
-// Test: Empty array
-const empty = tail([]);
-assertEqual(empty.length, 0);
+  it("returns [] for empty array", () => {
+    const result = tail([]);
+    assert.deepEqual(result, []);
+  });
 
-// Test: Original array not modified
-const words = ["Yo Yo", "Lighthouse", "Labs"];
-tail(words);
-assertEqual(words.length, 3);
+  it("does not modify the original array", () => {
+    const words = ["Yo Yo", "Lighthouse", "Labs"];
+    tail(words);
+    assert.deepEqual(words, ["Yo Yo", "Lighthouse", "Labs"]);
+  });
+});
