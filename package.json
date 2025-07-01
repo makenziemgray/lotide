@@ -1,12 +1,12 @@
 {
-  "name": "lotide",
-  "version": "1.0.0",
-  "description": "",
+  "name": "@makenziemgray/lotide",
+  "version": "1.0.1",
+  "description": "A mini clone of Lodash for educational purposes",
   "main": "index.js",
   "scripts": {
     "test": "mocha"
   },
-  "author": "Michael Gray",
+  "author": "Makenzie Gray <makenziemgray0102@gmail.com>",
   "license": "ISC",
   "devDependencies": {
     "chai": "^4.3.1",
